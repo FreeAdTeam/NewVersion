@@ -125,16 +125,14 @@
     </ImageAsset>
   </ItemGroup>
   <ItemGroup>
-    <ITunesArtwork Include="Resources\ITunesArtwork" />
-    <ITunesArtwork Include="Resources\ITunesArtwork%402x" />
-  </ItemGroup>
-  <ItemGroup>
-    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <BundleResource Include="Resources\ITunesArtwork" />
+    <BundleResource Include="Resources\ITunesArtwork%402x" />
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -143,6 +141,87 @@
     <Compile Include="ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images\ad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images\company.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images\ground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images\hamburger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images\homeground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images\homeground2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images\list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images\main.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images\manual.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images\pageGround.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images\person.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images\products.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images\recruit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images\rent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\1024.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-60%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-Small-40%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-Small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-Small%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon%402x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
