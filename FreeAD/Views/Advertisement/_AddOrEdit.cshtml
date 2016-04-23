@@ -1,0 +1,192 @@
+﻿@using System.Globalization
+@model Advertisement
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<style>
+    textarea{
+        max-width:none;
+    }
+</style>
+@{
+    var root = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + Url.Content("~/");
+    var languageId = Context.GetLanguageId();
+}
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" onclick="dismissModal()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">@(Model.Operator==null?"Add":"Edit")</h4>
+        </div>
+        <div class="modal-body">
+            @using (Html.BeginForm("AddOrEdit", "Advertisement", FormMethod.Post, new { id = "DataForm"+Model.Id }))
+            {
+                @Html.HiddenFor(d => d.Deleted)
+                @Html.HiddenFor(d => d.Operator)
+                @Html.HiddenFor(d => d.OperationDate)
+                <div>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href=@("#tab_1" + Model.Id) data-toggle="tab">@Html.LanguageFieldString("Basic Information", languageId)</a></li>
+                        <li class=""><a href=@("#tab_2" + Model.Id) data-toggle="tab">@Html.LanguageFieldString("Detail", languageId)</a></li>
+                        <li class=""><a href=@("#tab_3" + Model.Id) data-toggle="tab">@Html.LanguageFieldString("My Image Library", languageId)</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id=@("tab_1" + Model.Id) style="margin-top: 10px;">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(d=>d.Id)
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            @Html.LanguageField(model => model.KeyWord, languageId, new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.KeyWord, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.KeyWord, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LanguageField(model => model.Company, languageId,  new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.Company, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Company, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LanguageField(model => model.Contact, languageId,  new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.Contact, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Contact, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LanguageField(model => model.Phone, languageId,  new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LanguageField(model => model.CategoryId, languageId,  new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.CategoryId, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            @Html.LanguageField(model => model.Website, languageId,  new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LanguageField(model => model.Email, languageId, new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LanguageField(model => model.ValidStartDate, languageId, new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.ValidStartDate, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.ValidStartDate, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LanguageField(model => model.ValidEndDate, languageId, new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.ValidEndDate, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.ValidEndDate, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LanguageField(model => model.Area, languageId, new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.Area, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    </div>
+                                <div class="col-md-12">
+                                    @Html.LanguageField(model => model.ShortDescription,languageId)
+                                </div>
+                                <div class="col-md-12">
+                                        @Html.EditorFor(model => model.ShortDescription)
+                                        @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane" id=@("tab_2" + Model.Id) style="margin-top: 10px;">
+                            <div class=" form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(model => model.Detail, new { id= @Html.Raw("detail" + Model.Id)} )
+                                        @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id=@("tab_3" + Model.Id) style="margin-top: 10px;">
+                            <div class="row" style="height:400px; overflow-y:auto">
+                                @{ 
+                                    var dbContext = Context.GetContainer().GetInstance<ApplicationDbContext>();
+                                    foreach (var item in dbContext.UserImages.Where(d=>d.Operator==User.Identity.Name&& d.Deleted!=true).OrderByDescending(d => d.Id))
+                                    {
+                                        <div class="col-xs-6 col-md-2">
+                                            <div href="#" class="thumbnail" style="margin-bottom:0px;">
+                                                @if (item.FileType.Contains(".png") || item.FileType.Contains(".bmp") || item.FileType.Contains(".jpg"))
+                                                {
+                                                    <img src="@Html.Raw("/userupload/" + item.Id + item.FileType)" alt="image">
+                                                    <label>@item.FileName</label>
+                                                }
+                                                else
+                                                {
+                                                    <img src="@Html.Raw("/userupload/file.png")" alt="image">
+                                                    <a target="_blank" href="@Html.Raw( "/userupload/" + item.Id + item.FileType)" >@item.FileName</a>
+                                                }
+                                                <input class="form-control url" type="text" style="font-size:xx-small" value="@Html.Raw(root + "userupload/" + item.Id + item.FileType)" />
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               }
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary btn-sm" onclick=@Html.Raw("formSubmit"+Model.Id+"()")>@Html.LanguageFieldString("Comfirm", languageId)</button>
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" onclick="dismissModal()">@Html.LanguageFieldString("Close", languageId)</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(@Html.Raw("'#detail" + Model.Id+"'")).summernote({
+            height: 300,                 // set editor height
+            minHeight: 150,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+        });
+        $(@Html.Raw("'#detail" + Model.Id + "'")).code($(@Html.Raw("'#detail" + Model.Id + "'")).val());
+    })
+    function @Html.Raw("formSubmit" + Model.Id + "()") {
+        var remark = $(@Html.Raw("'#detail" + Model.Id+"'")).code();
+        //alert(remark);
+        $(@Html.Raw("'#detail" + Model.Id+"'")).val(remark);
+        $(@Html.Raw("'#DataForm" + Model.Id+"'")).submit();
+    }
+    $(".url").on("click", function () {
+        $(this).select();
+    });
+</script>

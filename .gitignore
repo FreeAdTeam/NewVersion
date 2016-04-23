@@ -3,3 +3,15 @@
 ################################################################################
 
 /FreeAD/bin
+/FreeAD/obj
+/FreeADApi/bin
+/FreeADApi/obj
+/FreeAD/Properties
+/FreeADApi/Properties
+/FreeADPortable/bin
+/FreeADPortable/obj
+/Native/PhoneApp/PhoneApp/bin
+/Native/PhoneApp/PhoneApp/obj
+/Native/PhoneApp/PhoneApp.Droid/bin
+/Native/PhoneApp/PhoneApp.Droid/obj
+/Native/PhoneApp/PhoneApp.iOS/obj/iPhone

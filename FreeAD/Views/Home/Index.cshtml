@@ -1,0 +1,83 @@
+﻿@model ConditionViewModel<Advertisement>
+@{
+    ViewBag.Title = "Free ADs";
+    var languageId = Context.GetLanguageId();
+    var languages = CacheHelper.GetCache<Language>(CacheType.Language);
+    var categories = CacheHelper.GetCache<Category>(CacheType.Category).Where(d => d.LanguageId == languageId).OrderBy(d => d.Order).ToList();
+    var categoryName = "";
+    if (string.IsNullOrEmpty(Model.SearchTwo))
+    {
+        categoryName = categories.FirstOrDefault().Name;
+        Model.SearchTwo = categories.FirstOrDefault().Id.ToString();
+    }
+    else
+    {
+        categoryName = categories.Where(d=>d.Id==long.Parse(Model.SearchTwo)).FirstOrDefault().Name;
+    }
+    var language = languages.Where(d => d.Id == languageId).FirstOrDefault();
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(d => d.SearchTwo)
+    @Html.HiddenFor(d => d.ChangeOrderDirection)
+    <h1 class="text-center">@Html.LanguageFieldString("Find whatever you want", languageId)</h1>
+    <div style="margin-left:auto;margin-right:auto;max-width:600px;">
+        <div class="input-group">
+            @Html.TextBoxFor(model => model.Search, new { @class = "form-control", style = "max-width:none", placeholder = "Search" } )
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-info">@Html.LanguageFieldString("Search In", languageId)</button>
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span id="categoryName">@Html.LanguageFieldString(categoryName, languageId)</span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    @foreach (var item in categories)
+                    {
+                        <li><a href="#" data-id="@item.Id" data-name="@item.Name" onclick="selectCategory(this)">@item.Name</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+
+<br />
+@if (Model.Data.Count > 0)
+{
+    var i = 0;
+    foreach (var item in Model.Data)
+    {
+        if (i % 2 == 0)
+        {
+            @Html.Raw("<div class='row'>")
+        }
+        <div class="col-md-6">
+            <div class="bs-callout @item.Category.ColorClass">
+                <a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#fullModalContent" href="/Home/ModalDetail/@item.Id" onclick="openModal()">@item.KeyWord @Html.Raw("-" + item.Category.Name)</a>
+                <br />@Html.LanguageField(modelItem => item.ShortDescription, languageId)
+                <p>@item.ShortDescription</p>
+            </div>
+        </div>
+        if (i % 2 == 1)
+        {
+            @Html.Raw("</div>")
+        }
+        i++;
+    }
+}
+else
+{
+    @Html.Raw(language.profile)
+}
+<a id="myajaxLink" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#fullModalContent" href="/Home/ModalDetail/@ViewBag.Id" onclick="openModal()"></a>
+<script>
+    $(function () {
+        var id=@ViewBag.Id;
+        if(id!=null){
+            $('#myajaxLink').click();
+        }
+    });
+</script>

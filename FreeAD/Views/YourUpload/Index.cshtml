@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@model IQueryable<UserImage>
+<form action="/YourUpload/Upload" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-8">
+            <p style="color:blue">uploaded file extension must be jpg, png or bmp and the single maximum size is not greater than 1 MB</p>
+        </div>
+        <div class="col-md-2">
+            <input id="fileupload" class="form-control" type="file" name="files[]" multiple >
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Upload</button>
+        </div>
+        
+    </div>
+</form>
+<hr />
+
+    @{
+        var root = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + Url.Content("~/");
+        var i = 1;
+        foreach (var item in Model)
+        {
+            if (i % 4 == 1)
+            {
+                @Html.Raw("<div class='row'>")
+                    }
+                    <div class="col-xs-6 col-md-3">
+                        <div href="#" class="thumbnail">
+                            @if (item.FileType.Contains(".png") || item.FileType.Contains(".bmp") || item.FileType.Contains(".jpg"))
+                            {
+                                <img src="@Html.Raw("/userupload/" + item.Id + item.FileType)" alt="image">
+                                <label>@item.FileName</label>
+                            }
+                            else
+                            {
+                                <img src="@Html.Raw("/userupload/file.png")" alt="image">
+                                <a target="_blank" href="@Html.Raw( "/userupload/" + item.Id + item.FileType)">@item.FileName</a>
+                            }
+                            <input class="form-control url" type="text" style="font-size:xx-small" value="@Html.Raw(root + "userupload/" + item.Id + item.FileType)" />
+                        </div>
+                        <a onclick="Delete(this)" data-id="@item.Id" style="cursor:pointer; position:absolute;top:5px;right:20px; " class="fa fa-times fa-3x"></a>
+                    </div>
+            if (i % 4 == 0)
+            {
+                @Html.Raw("</div>")
+            }
+            i++;
+        }
+    }
+                
+
+<script>
+    function Delete(e) {
+        var id = $(e).attr("data-id");
+        var requrl = "/YourUpload/_Delete/" + id;
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            cashe: false,
+            url: requrl,
+            success: function (data) {
+                //alert(data);
+                if (data == "fail") {
+                    alert("Failed to change data, please try later.");
+                    return;
+                }
+                $(e).parent().hide();
+                $(e).hide();
+            },
+            error: function (failure) {
+                alert(failure.responseText);
+            }
+        });
+    }
+</script>
+

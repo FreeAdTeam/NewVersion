@@ -1,0 +1,13 @@
+﻿<Properties StartupItem="Native\PhoneApp\PhoneApp.Droid\PhoneApp.Droid.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.192.168.17.101:5555" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Native\PhoneApp\PhoneApp.Droid\Resources\Resource.designer.cs">
+    <Files>
+      <File FileName="Native\PhoneApp\PhoneApp\Views\MasterPager.xaml.cs" Line="22" Column="5" />
+      <File FileName="Native\PhoneApp\PhoneApp.Droid\Resources\Resource.designer.cs" Line="5" Column="33" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

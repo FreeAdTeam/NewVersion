@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PhoneApp.Others" BackgroundImage="pageGround.png">
+	<ContentPage.Content>
+	    <StackLayout Padding="10">
+	    	<Button Text="No Internet,Connect again" x:Name="ConnectButton" IsVisible="{Binding ConnectShow}"></Button>
+         	<WebView Navigating="webviewNavigating" Navigated="webviewNavigated" Source="{Binding URL}" HeightRequest = "1000" WidthRequest = "1000" IsVisible="{Binding WebViewShow}">
+         	</WebView>
+         	<ActivityIndicator IsRunning="true" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" IsVisible="{Binding IndicatorShow}"></ActivityIndicator>
+	    </StackLayout>
+	</ContentPage.Content>
+</ContentPage>

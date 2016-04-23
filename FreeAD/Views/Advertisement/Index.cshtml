@@ -1,0 +1,216 @@
+﻿@model ConditionViewModel<Advertisement>
+@{ 
+    var languageId = Context.GetLanguageId();
+}
+@using (Html.BeginForm("Index", "Advertisement", FormMethod.Post, new { id = "searchform" }))
+{
+    @Html.HiddenFor(model => model.Order, new { id = "orderBy" })
+    @Html.HiddenFor(model => model.OrderDirection)
+    @Html.HiddenFor(model => model.ChangeOrderDirection)
+    @Html.HiddenFor(model => model.LanguageId)
+    <br />
+    <div class="row" style=" margin-bottom: 20px;">
+        <div class="col-lg-3 col-md-12">
+            <strong>@Html.LanguageFieldString("My ADs", languageId)</strong>
+        </div>
+        <div class="col-lg-3 col-md-12" style="padding-top:6px;">
+            <strong>Page @Html.SelectList_Pages("CurrentPage", Model.CurrentPage, Model.TotalPages, new { onchange = "resetSortDirectionAndSubmit();" })</strong>
+            <strong>Display @Html.SelectList_PageSize("PerPageSize", Model.PerPageSize, 10, new { onchange = "resetSortDirectionAndSubmit();" }) records</strong>
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <div class="sidebar-form" style="width: 350px; margin-left: 10px; margin-right: 10px; margin-top: 0px; margin-bottom: 0px;">
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.Search, new { @class = "form-control", placeholder = "Key words", style = "max-width:none" })
+                    <span class="input-group-btn">
+                        <button type="button" onclick="resetSortDirectionAndSubmit()" name="seach" id="search-btn" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-12">
+            <a href="#" class="btn btn-primary" style="color: white;margin-left:10px;" data-toggle="modal" data-target="#ModalAdd" ><i class="fa fa-plus-circle"></i>@Html.LanguageFieldString("Add One", languageId)</a>
+        </div>
+    </div>
+}
+<table class="table table-bordered table-hover table-condensed table-responsive">
+    <thead>
+        <tr style="background-color: darkgray;">
+            <th>
+                <a href="#"
+                   data-header-val="KeyWord"
+                   data-header>
+                    @Html.LanguageFieldString("KeyWord", languageId)
+                </a>
+            </th>
+            <th>
+                <a href="#"
+                   data-header-val="Category"
+                   data-header>
+                    @Html.LanguageFieldString("Category", languageId)
+                </a>
+            </th>
+
+            <th>
+                <a href="#"
+                   data-header-val="StartDate"
+                   data-header>
+                    @Html.LanguageFieldString("ValidStartDate", languageId)
+                    
+                </a>
+            </th>
+            <th>
+                <a href="#"
+                   data-header-val="EndDate"
+                   data-header>
+                    @Html.LanguageFieldString("ValidEndDate", languageId)
+                </a>
+            </th>
+            <th>
+                @Html.LanguageFieldString("ShortDescription", languageId)
+            </th>
+            <th>
+                @Html.LanguageFieldString("Popular", languageId)
+                    
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var item in Model.Data)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.KeyWord)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @item.ValidStartDate.ToShortDateString()
+            </td>
+
+            <td>
+                @item.ValidEndDate.ToShortDateString()
+            </td>
+            <td>
+                @{
+                    var show = "";
+                    var sd = item.ShortDescription;
+                    if (!string.IsNullOrEmpty(sd))
+                    {
+                        if (sd.Length > 40)
+                        {
+                            show = sd.Substring(0, 40) + "...";
+                        }
+                        else
+                        {
+                            show = sd;
+                        }
+                    }
+                }
+                <a href="#" data-toggle="tooltip" title='@item.ShortDescription'>@show</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Popular)
+            </td>
+
+            <td>
+                <a class="fa fa-chevron-circle-down" onclick="showTableDetail(this)" style="cursor:pointer"></a> |
+                <a class="fa fa-pencil-square-o" href="#" data-id=@item.Id onclick="edit(this)"></a> |
+                <a class="fa fa-trash" href="#" data-toggle="modal" data-target=@Html.Raw("#ModalDelete" + item.Id)></a>
+                <div class="modal fade" id=@Html.Raw("ModalDelete" + item.Id) tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    @Html.Partial("_Delete", item)
+                </div>
+            </td>
+        </tr>
+        <tr style="display: none">
+            <td colspan="8">
+                <div class="row">
+                    <div class="col-md-12">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.LanguageField(model => item.Area,languageId)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => item.Area)
+                            </dd>
+                            <dt>
+                                @Html.LanguageField(model => item.Company, languageId)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => item.Company)
+                            </dd>
+                            <dt>
+                                @Html.LanguageField(model => item.Contact, languageId)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => item.Contact)
+                            </dd>
+                            <dt>
+                                @Html.LanguageField(model => item.Phone, languageId)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => item.Phone)
+                            </dd>
+                            <dt>
+                                @Html.LanguageField(model => item.Email, languageId)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => item.Email)
+                            </dd>
+                            <dt>
+                                @Html.LanguageField(model => item.Website, languageId)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => item.Website)
+                            </dd>
+                            <dt>
+                                @Html.LanguageField(model => item.OperationDate, languageId)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model=>item.OperationDate)
+                            </dd>
+                            <dt>
+                                @Html.LanguageField(model => item.ShortDescription, languageId)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => item.ShortDescription)
+                            </dd>
+                            <dt>
+                                @Html.LanguageField(model => item.Detail, languageId)
+                            </dt>
+                            <dd>
+                                @Html.Raw(item.Detail)
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
+            </td>
+        </tr>
+    }
+</table>
+<div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    @Html.Partial("_AddOrEdit", new Advertisement() { ValidStartDate=DateTime.UtcNow,ValidEndDate=DateTime.UtcNow.AddDays(30),Contact=User.Identity.Name.Substring(0,User.Identity.Name.IndexOf("@"))})
+</div>
+<div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+
+<script>
+    function edit(e) {
+        $.get('/Advertisement/OpenAddOrEdit', { id: $(e).attr("data-id") },
+       function (data) {
+           //openModal();
+           $("#ModalEdit").html(data);
+           $("#busy").css("display", "none");
+           $("#ModalEdit").modal("show");
+       },
+       "html"
+       );
+    }
+    function droplistOnchanged(e) {
+        var id = $(e).val();
+        link = "/Advertisement/Index?languageId=" + id;
+        window.location.href = link;
+    }
+
+</script>

@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<CarouselPage  xmlns="http://xamarin.com/schemas/2014/forms" 
+xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PhoneApp.MyList">
+	<ContentPage BackgroundImage="pageGround.png">
+	    <StackLayout Padding="10">
+	      <Image Source="company.png" HorizontalOptions="Center" HeightRequest="100" Aspect="Fill"></Image>
+	      <StackLayout HorizontalOptions="Center" Orientation="Horizontal" Padding="0,-40,0,0">
+		      <Label Text="." FontSize="50" TextColor="Red" />
+		      <Label Text="." FontSize="50" TextColor="Black" />
+		      <Label Text="." FontSize="50" TextColor="Black"/>
+		      <Label Text="." FontSize="50" TextColor="Black"/>
+		      <Label Text="." FontSize="50" TextColor="Black" />
+	      </StackLayout>
+	      <ListView ItemsSource="{Binding Companies}" ItemTapped="OnItemTapped" RowHeight="80" HasUnevenRows="True">
+	        <ListView.ItemTemplate>
+	          <DataTemplate>
+	            <ViewCell>
+	              <StackLayout>
+	                <Label Text="{Binding Keyword}" TextColor="Blue" ></Label>
+	                <Label Text="{Binding ShortDescription}" Font="11" TextColor="Black"></Label>
+	              </StackLayout>
+	            </ViewCell>
+	          </DataTemplate>
+	        </ListView.ItemTemplate>
+	      </ListView>
+	    </StackLayout>
+	</ContentPage>
+	<ContentPage BackgroundImage="pageGround.png">
+	    <StackLayout Padding="10">
+	      <Image Source="recruit.png" HorizontalOptions="Center" HeightRequest="100" Aspect="Fill"></Image>
+	      <StackLayout HorizontalOptions="Center" Orientation="Horizontal" Padding="0,-40,0,0">
+		      <Label Text="." FontSize="50" TextColor="Black" />
+		      <Label Text="." FontSize="50" TextColor="Red" />
+		      <Label Text="." FontSize="50" TextColor="Black"/>
+		      <Label Text="." FontSize="50" TextColor="Black"/>
+		      <Label Text="." FontSize="50" TextColor="Black" />
+	      </StackLayout>
+	      <ListView ItemsSource="{Binding Recruits}" ItemTapped="OnItemTapped" RowHeight="80" HasUnevenRows="True">
+	        <ListView.ItemTemplate>
+	          <DataTemplate>
+	            <ViewCell>
+	              <StackLayout>
+	                <Label Text="{Binding Keyword}" TextColor="Blue" ></Label>
+	                <Label Text="{Binding ShortDescription}" Font="11" TextColor="Black"></Label>
+	              </StackLayout>
+	            </ViewCell>
+	          </DataTemplate>
+	        </ListView.ItemTemplate>
+	      </ListView>
+	    </StackLayout>
+	</ContentPage>
+		<ContentPage BackgroundImage="pageGround.png">
+	    <StackLayout Padding="10">
+	      <Image Source="rent.png" HorizontalOptions="Center" HeightRequest="100" Aspect="Fill"></Image>
+	      <StackLayout HorizontalOptions="Center" Orientation="Horizontal" Padding="0,-40,0,0">
+		      <Label Text="." FontSize="50" TextColor="Black" />
+		      <Label Text="." FontSize="50" TextColor="Black" />
+		      <Label Text="." FontSize="50" TextColor="Red"/>
+		      <Label Text="." FontSize="50" TextColor="Black"/>
+		      <Label Text="." FontSize="50" TextColor="Black" />
+	      </StackLayout>
+	      <ListView ItemsSource="{Binding Rents}" ItemTapped="OnItemTapped" RowHeight="80" HasUnevenRows="True">
+	        <ListView.ItemTemplate>
+	          <DataTemplate>
+	            <ViewCell>
+	              <StackLayout>
+	                <Label Text="{Binding Keyword}" TextColor="Blue" ></Label>
+	                <Label Text="{Binding ShortDescription}" Font="11" TextColor="Black"></Label>
+	              </StackLayout>
+	            </ViewCell>
+	          </DataTemplate>
+	        </ListView.ItemTemplate>
+	      </ListView>
+	    </StackLayout>
+	</ContentPage>
+	<ContentPage BackgroundImage="pageGround.png">
+	    <StackLayout Padding="10">
+	      <Image Source="products.png" HorizontalOptions="Center" HeightRequest="100" Aspect="Fill"></Image>
+	      <StackLayout HorizontalOptions="Center" Orientation="Horizontal" Padding="0,-40,0,0">
+		      <Label Text="." FontSize="50" TextColor="Black" />
+		      <Label Text="." FontSize="50" TextColor="Black" />
+		      <Label Text="." FontSize="50" TextColor="Black"/>
+		      <Label Text="." FontSize="50" TextColor="Red"/>
+		      <Label Text="." FontSize="50" TextColor="Black"/>
+	      </StackLayout>
+	      <ListView ItemsSource="{Binding Products}" ItemTapped="OnItemTapped" RowHeight="80" HasUnevenRows="True">
+	        <ListView.ItemTemplate>
+	          <DataTemplate>
+	            <ViewCell>
+	              <StackLayout>
+	                <Label Text="{Binding Keyword}" TextColor="Blue" ></Label>
+	                <Label Text="{Binding ShortDescription}" Font="11" TextColor="Black"></Label>
+	              </StackLayout>
+	            </ViewCell>
+	          </DataTemplate>
+	        </ListView.ItemTemplate>
+	      </ListView>
+	    </StackLayout>
+	</ContentPage>
+	<ContentPage BackgroundImage="pageGround.png">
+	    <StackLayout Padding="10">
+	      <Image Source="person.png" HorizontalOptions="Center" HeightRequest="100" Aspect="Fill"></Image>
+	      <StackLayout HorizontalOptions="Center" Orientation="Horizontal" Padding="0,-40,0,0">
+		      <Label Text="." FontSize="50" TextColor="Black" />
+		      <Label Text="." FontSize="50" TextColor="Black" />
+		      <Label Text="." FontSize="50" TextColor="Black"/>
+		      <Label Text="." FontSize="50" TextColor="Black"/>
+		      <Label Text="." FontSize="50" TextColor="Red"/>
+	      </StackLayout>
+	      <ListView ItemsSource="{Binding People}" ItemTapped="OnItemTapped" RowHeight="80" HasUnevenRows="True">
+	        <ListView.ItemTemplate>
+	          <DataTemplate>
+	            <ViewCell>
+	              <StackLayout>
+	                <Label Text="{Binding Keyword}" TextColor="Blue" ></Label>
+	                <Label Text="{Binding ShortDescription}" Font="11" TextColor="Black"></Label>
+	              </StackLayout>
+	            </ViewCell>
+	          </DataTemplate>
+	        </ListView.ItemTemplate>
+	      </ListView>
+	    </StackLayout>
+	</ContentPage>
+</CarouselPage >

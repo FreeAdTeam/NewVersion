@@ -1,0 +1,19 @@
+﻿@model Advertisement
+<h2>@Model.KeyWord </h2>
+@if (string.IsNullOrEmpty(Model.Detail))
+{
+    @Html.Raw(Model.ShortDescription)
+}
+else
+{
+    @Html.Raw(Model.Detail)
+}
+<div style="clear:both;"></div>
+@{ 
+    var languageId = int.Parse(Model.Category.LanguageId.ToString());
+}
+<h5>@Html.LanguageFieldString("Category", languageId):@Model.Category.Name</h5>
+<h5>@Html.LanguageFieldString("Company", languageId):@Model.Company</h5>
+<h5>@Html.LanguageFieldString("Contact", languageId):@Model.Contact</h5>
+<h5>@Html.LanguageFieldString("Phone", languageId):@Model.Phone</h5>
+<h5>@Html.LanguageFieldString("Email", languageId):@Model.Email</h5>

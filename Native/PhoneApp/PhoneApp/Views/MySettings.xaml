@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+x:Class="PhoneApp.MySettings">
+	<ContentPage.Content>
+	<Grid>
+        <Image Source="pageGround.png" Aspect="AspectFill" />
+        <StackLayout>
+        	<Label HorizontalOptions="Center" FontSize="30" Text="Personal Information"></Label>
+	        <ScrollView  Orientation = "Vertical" VerticalOptions="StartAndExpand">
+		<StackLayout Orientation="Vertical" Padding="10">
+			<StackLayout Orientation="Horizontal">
+				<Label VerticalOptions="Center" TextColor="Black" >Last Name</Label>
+				<Entry Text="{Binding LastName}"  TextColor="Black"  HorizontalOptions="FillAndExpand"></Entry>
+			</StackLayout>
+			<StackLayout  Orientation="Horizontal">
+				<Label VerticalOptions="Center" TextColor="Black">First Name</Label>
+				<Entry Text="{Binding FirstName}" TextColor="Black" HorizontalOptions="FillAndExpand"></Entry>
+			</StackLayout>
+			<StackLayout Orientation="Horizontal">
+				<Label VerticalOptions="Center" TextColor="Black">Email address</Label>
+				<Entry Text="{Binding Email}" TextColor="Black" HorizontalOptions="FillAndExpand"></Entry>
+			</StackLayout>
+			<StackLayout Orientation="Horizontal">
+				<Label VerticalOptions="Center" TextColor="Black">Phone Number</Label>
+				<Entry Text="{Binding Phone}" TextColor="Black" HorizontalOptions="FillAndExpand"></Entry>
+			</StackLayout>
+			<StackLayout Orientation="Horizontal">
+				<Label VerticalOptions="Center" TextColor="Black">Mobile Number</Label>
+				<Entry Text="{Binding Mobile}" TextColor="Black" HorizontalOptions="FillAndExpand"></Entry>
+			</StackLayout>
+			<StackLayout Orientation="Horizontal">
+				<Label VerticalOptions="Center" TextColor="Black">Receive News Letters</Label>
+				<Switch IsToggled="{Binding ReceiveEmail}" ></Switch>
+			</StackLayout>
+			<StackLayout Orientation="Horizontal">
+				<Label VerticalOptions="Center" TextColor="Black">Receive Notifications</Label>
+				<Switch IsToggled="{Binding ReceiveNotification}"></Switch>
+			</StackLayout>
+			<StackLayout Orientation="Horizontal">
+				<Button Text="Cancel" Command="{Binding CancelCommand}"></Button>
+				<Button Text="Save" Command="{Binding SaveCommand}" ></Button>
+			</StackLayout>
+
+			<Label Text="{Binding ReturnMessage}" HorizontalOptions="Center" TextColor="Blue"></Label>
+		</StackLayout>
+	        </ScrollView>
+        </StackLayout>
+    </Grid>
+	</ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,11 @@
+﻿@model long
+@{
+    var languageId = Context.GetLanguageId();
+    var categories = CacheHelper.GetCache<Category>(CacheType.Category).Where(d=>d.LanguageId==languageId).OrderBy(d=>d.Order).Select(u => new SelectListItem
+    {
+        Text = u.Name,
+        Value = u.Id.ToString(),
+        Selected = u.Id == Model
+    }).ToArray();
+}
+@Html.DropDownList("", categories, new { @class = "form-control" })
