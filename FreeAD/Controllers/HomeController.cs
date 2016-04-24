@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace FreeAD.Controllers
 {
-    public class HomeController : Controller  //SOMETHING COOL HERE.
+    public class HomeController : Controller
     {
         ApplicationDbContext _db;
         public HomeController(ApplicationDbContext db)
