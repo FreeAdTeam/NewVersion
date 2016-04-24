@@ -14,7 +14,6 @@ namespace FreeAD.Controllers
 {
     public class HomeController : Controller
     {
-        // CHANGES again
         ApplicationDbContext _db;
         public HomeController(ApplicationDbContext db)
         {
