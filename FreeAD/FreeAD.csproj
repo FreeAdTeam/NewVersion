@@ -249,7 +249,10 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Images\ad.png" />
+    <Content Include="Images\Arthur.jpg" />
     <Content Include="Images\contentBg.jpg" />
+    <Content Include="Images\Andrew.jpg" />
+    <Content Include="Images\emily.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\FontAwesome.otf" />
