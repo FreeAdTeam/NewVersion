@@ -1,20 +1,17 @@
 ﻿@{
     ViewBag.Title = "About Us";
 }
-<h2>@ViewBag.Title.</h2>
-
-
 @{
     var languageId = Context.GetLanguageId();
 }
-
 <div class="container">
+    <h2 class="text-center">@ViewBag.Title.</h2>
     <div class="row">
-        <div class="col-md-4 col-md-offset-1 col-sm-12">
-            <img src="~/Images/Arthur.jpg" width="200" hight="180" />
+        <div class="col-md-4 col-md-offset-2 col-sm-12">
+            <img src="~/Images/Arthur.jpg" class="img-responsive" />
         </div>
-        <div class="col-md-5 col-sm-6">
-            <h4>@Html.LanguageFieldString("Arthur Lu", languageId) (Developer&Tester)</h4>
+        <div class="col-md-4 col-sm-12">
+            <h4>@Html.LanguageFieldString("Arthur Lu", languageId) (Designer&Developer)</h4>
             <br />
             <p>@Html.LanguageFieldString("Phone:", languageId) 021-057-8463</p>
             <p>@Html.LanguageFieldString("Email:", languageId) arthur.lv6@gmail.com</p>
@@ -24,10 +21,10 @@
     <br />
     <br />
     <div class="row">
-        <div class="col-md-4 col-md-offset-1 col-sm-12">
-            <img src="~/Images/Andrew.jpg" width="200" hight="180" />
+        <div class="col-md-4 col-md-offset-2 col-sm-12">
+            <img src="~/Images/Andrew.jpg" class="img-responsive" />
         </div>
-        <div class="col-md-5 col-sm-6">
+        <div class="col-md-4 col-sm-12">
             <h4>@Html.LanguageFieldString("Andrew", languageId) (Tester)</h4>
             <br />
             <p>@Html.LanguageFieldString("Phone:", languageId) 021-0843-2328</p>
@@ -37,17 +34,14 @@
     <br />
     <br />
     <div class="row">
-        <div class="col-md-4 col-md-offset-1 col-sm-12">
-            <img src="~/Images/emily.jpg" width="200" hight="180" />
+        <div class="col-md-4 col-md-offset-2 col-sm-12">
+            <img src="~/Images/emily.jpg" class="img-responsive" />
         </div>
-        <div class="col-md-5 col-sm-6">
+        <div class="col-md-4 col-sm-12">
             <h4>@Html.LanguageFieldString("Emily Chen", languageId) (Developer)</h4>
             <br />
             <p>@Html.LanguageFieldString("Phone:", languageId) 022-651-9881</p>
             <p>@Html.LanguageFieldString("Email:", languageId) Helloourworld@icloud.com</p>
         </div>
     </div>
-
-
 </div>
-
