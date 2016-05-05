@@ -35,7 +35,7 @@ namespace FreeAD.Controllers
 
                 if (ext == ".jpg" || ext == ".png" || ext == ".bmp")
                 {
-                    if (file.ContentLength > 1000000) continue;
+                    if (file.ContentLength > 1000000) continue;//1 m
                 }
 
                 var newImage = new UserImage

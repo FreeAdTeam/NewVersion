@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using FreeAD.Models;
 using FreeADPortable.Domain;
 using FreeADPortable.Models;
+using AutoMapper.QueryableExtensions;
 
 namespace FreeAD.Infrastructure
 {
@@ -30,9 +31,11 @@ namespace FreeAD.Infrastructure
             base.Dispose(disposing);
         }
         #region customer part
-        public virtual ConditionViewModel<T> GetSearchResult<T, TOrderBy>(ConditionViewModel<T> condition, Expression<Func<T, TOrderBy>> orderBy, string[] includes = null, bool httpget = true) where T : class
+        public virtual ConditionViewModel<T, TConvert> GetSearchResult<T, TOrderBy,TConvert>(ConditionViewModel<T, TConvert> condition, Expression<Func<T, TOrderBy>> orderBy, string[] includes = null, bool httpget = true) 
+            where T : class
+            where TConvert:class
         {
-            var result = new ConditionViewModel<T>();
+            var result = new ConditionViewModel<T,TConvert>();
             SortOrder sortOrder = SortOrder.Descending;
             if (httpget)
             {
@@ -75,7 +78,7 @@ namespace FreeAD.Infrastructure
                 }
             }
 
-            IQueryable<T> group;
+            IQueryable<T> data;
             if (condition.Func == null)
             {
                 condition.Func = d => true;
@@ -88,7 +91,7 @@ namespace FreeAD.Infrastructure
             }
             if (sortOrder == SortOrder.Ascending)
             {
-                group =
+                data =
                     Set<T>()
                         .Where(condition.Func)
                         .OrderBy(orderBy)
@@ -97,7 +100,7 @@ namespace FreeAD.Infrastructure
             }
             else
             {
-                group =
+                data =
                     Set<T>()
                         .Where(condition.Func)
                         .OrderByDescending(orderBy)
@@ -108,10 +111,10 @@ namespace FreeAD.Infrastructure
             {
                 foreach (var item in includes)
                 {
-                    group = group.Include(item);
+                    data = data.Include(item);
                 }
             }
-            result.Data = group.ToList();
+            result.Data = data.ProjectTo<TConvert>().ToList();
             result.TotalPages = totalPages == 0 ? 1 : totalPages;
             result.PerPageSize = condition.PerPageSize;
             result.CurrentPage = condition.CurrentPage;

@@ -1,4 +1,4 @@
-﻿@model ConditionViewModel<Advertisement>
+﻿@model ConditionViewModel<Advertisement,AdvertisementViewModel>
 @{ 
     var languageId = Context.GetLanguageId();
 }
@@ -190,7 +190,7 @@
     }
 </table>
 <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    @Html.Partial("_AddOrEdit", new Advertisement() { ValidStartDate=DateTime.UtcNow,ValidEndDate=DateTime.UtcNow.AddDays(30),Contact=User.Identity.Name.Substring(0,User.Identity.Name.IndexOf("@"))})
+    @Html.Partial("_AddOrEdit", new AdvertisementViewModel() { ValidStartDate=DateTime.UtcNow,ValidEndDate=DateTime.UtcNow.AddDays(30),Contact=User.Identity.Name.Substring(0,User.Identity.Name.IndexOf("@"))})
 </div>
 <div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 </div>

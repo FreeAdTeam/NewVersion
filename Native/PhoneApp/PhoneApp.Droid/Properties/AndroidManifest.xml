@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="nz.co.advertisement" android:installLocation="auto" android:versionName="AdvertisementPlatform" android:versionCode="4">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="nz.co.advertisement" android:installLocation="auto" android:versionName="AdvertisementPlatform" android:versionCode="5">
 	<uses-sdk android:minSdkVersion="17" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.INTERNET" />
 	<application android:icon="@drawable/ad" android:label="advertisement platform"></application>
 </manifest>

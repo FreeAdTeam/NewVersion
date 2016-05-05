@@ -23,10 +23,10 @@ namespace FreeAD.Controllers
         {
             if (id != null)
                 ViewBag.Id = id;
-            return View(new ConditionViewModel<Advertisement>());
+            return View(new ConditionViewModel<Advertisement,AdvertisementViewModel>());
         }
         [HttpPost]
-        public ActionResult Index(ConditionViewModel<Advertisement> input)
+        public ActionResult Index(ConditionViewModel<Advertisement, AdvertisementViewModel> input)
         {
             input.Search = input.Search ?? "";
             Expression<Func<Advertisement, bool>> searchName;
