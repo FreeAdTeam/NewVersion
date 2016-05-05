@@ -72,7 +72,13 @@ namespace FreeAD
                 LanguageId = 1;//english default
             }
         }
-
+        public void Application_Error()
+        {
+            foreach (var task in Container.GetAllInstances<IRunOnError>())
+            {
+                task.Execute();
+            }
+        }
         public void Application_EndRequest()
         {
                 Container.Dispose();

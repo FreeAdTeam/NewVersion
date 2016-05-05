@@ -1,11 +1,47 @@
-﻿
-@{
-    ViewBag.Title = "Contact";
+﻿@{
     Layout = "~/Views/Shared/_LayoutPagePhone.cshtml";
 }
+@{
+    var languageId = Context.GetLanguageId();
+}
 <div class="container">
-    <h2>Contact</h2>
-    <p>Designer and developer: Arthur Lu</p>
-    <p>Developer and tester: Emily Chen</p>
-    <p>QA and Tester: Andrew</p>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <img src="~/Images/Arthur.jpg" class="img-responsive" />
+        </div>
+        <div class="col-md-12">
+            <h4>@Html.LanguageFieldString("Arthur Lu", languageId) (Designer&Developer)</h4>
+            <br />
+            <p>@Html.LanguageFieldString("Phone:", languageId) 021-057-8463</p>
+            <p>@Html.LanguageFieldString("Email:", languageId) arthur.lv6@gmail.com</p>
+            <p>@Html.LanguageFieldString("Website:", languageId) http://www.arthurcv.com/ </p>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <img src="~/Images/Andrew.jpg" class="img-responsive" />
+        </div>
+        <div class="col-md-12">
+            <h4>@Html.LanguageFieldString("Andrew", languageId) (Tester)</h4>
+            <br />
+            <p>@Html.LanguageFieldString("Phone:", languageId) 021-0843-2328</p>
+            <p>@Html.LanguageFieldString("Email:", languageId) liuandr@gmail.com</p>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <img src="~/Images/emily.jpg" class="img-responsive" />
+        </div>
+        <div class="col-md-12">
+            <h4>@Html.LanguageFieldString("Emily Chen", languageId) (Developer)</h4>
+            <br />
+            <p>@Html.LanguageFieldString("Phone:", languageId) 022-651-9881</p>
+            <p>@Html.LanguageFieldString("Email:", languageId) Helloourworld@icloud.com</p>
+        </div>
+    </div>
 </div>

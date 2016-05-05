@@ -10,7 +10,15 @@
         body {
             padding: 0px;
         }
-
+        img.bg {
+          width: 100%;
+          height: 100%;
+          /* Set up positioning */
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index:-1;
+        }
         .portfolio-modal .modal-content {
             padding: 10px 0;
         }
@@ -27,6 +35,7 @@
                 font-size: 12px;
             }
     </style>
+    <img class="bg" src="~/Images/pageGround.jpg"/>
     <div>
         @RenderBody()
     </div>

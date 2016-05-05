@@ -57,7 +57,7 @@ namespace FreeAD
 
             app.UseFacebookAuthentication(
                appId: "764402530357548",
-               appSecret: "42a6254ebfb2373d582754fbcb0e7191");
+               appSecret: "3b2e691983549f0f641f7a13ca6ef543");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {

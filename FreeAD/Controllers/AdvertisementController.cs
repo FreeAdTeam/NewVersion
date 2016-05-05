@@ -10,6 +10,8 @@ using System.Web;
 using System.Web.Mvc;
 using FreeADPortable.Domain;
 using FreeADPortable.Models;
+using AutoMapper.QueryableExtensions;
+using FreeAD.Models.ViewModels;
 
 namespace FreeAD.Controllers
 {
@@ -26,12 +28,13 @@ namespace FreeAD.Controllers
         public ActionResult Index()
         {
             var languageId=HttpContext.GetLanguageId();
-            var condition = new ConditionViewModel<Advertisement>() {LanguageId=languageId, ChangeOrderDirection = false, OrderDirection = "desc" };
+            var condition = new ConditionViewModel<Advertisement,AdvertisementViewModel>() {LanguageId=languageId, ChangeOrderDirection = false, OrderDirection = "desc" };
             condition.Func = d => d.Category.LanguageId==languageId && d.Operator==_currentUser.User.UserName && d.Deleted != true;
-            return View(_context.GetSearchResult(condition, d => d.OperationDate, new string[] { "Category" }));
+            var vm = _context.GetSearchResult(condition, d => d.OperationDate, new string[] { "Category" });
+            return View(vm);
         }
         [HttpPost]
-        public ActionResult Index(ConditionViewModel<Advertisement> input)
+        public ActionResult Index(ConditionViewModel<Advertisement, AdvertisementViewModel> input)
         {
             Expression<Func<Advertisement, bool>> searchName;
             if (string.IsNullOrEmpty(input.Search))
@@ -61,10 +64,11 @@ namespace FreeAD.Controllers
         }
         [ValidateInput(false)]
         [Transcation]
-        public ActionResult AddOrEdit(Advertisement input)
+        public ActionResult AddOrEdit(AdvertisementViewModel input)
         {
             try
             {
+                //throw new Exception();
                 input.OperationDate = _currentUser.NewZealandTime;
                 var detailMessage = "";
                 if (!string.IsNullOrEmpty(input.Detail))
@@ -74,11 +78,12 @@ namespace FreeAD.Controllers
                         detailMessage = "System didn't save your detail info. It is because the detail size is over chrome limit. Please try using IE or decrease your data like picture size.";
                     }
                 }
-                
+                var entity = AutoMapper.Mapper.Map<Advertisement>(input);
+
                 if (string.IsNullOrEmpty(input.Operator))
                 {
-                    input.Operator = _currentUser.User.UserName;
-                    _context.Advertisements.Add(input);
+                    entity.Operator = _currentUser.User.UserName;
+                    _context.Advertisements.Add(entity);
                 }
                 else
                 {
@@ -89,7 +94,7 @@ namespace FreeAD.Controllers
                     if (input.Operator != _currentUser.User.UserName)
                         return RedirectToAction("Index").WithError("Failure, you are not supposed to change other's data.");
                     var existing = _context.Advertisements.Find(input.Id);
-                    _context.Entry(existing).CurrentValues.SetValues(input);
+                    _context.Entry(existing).CurrentValues.SetValues(entity);
                 }
                 _context.SaveChanges();
                 if(!string.IsNullOrEmpty(detailMessage))
@@ -118,8 +123,7 @@ namespace FreeAD.Controllers
         }
         public PartialViewResult OpenAddOrEdit(long id)
         {
-            var ad = _context.Advertisements.Include("Category").Where(d=>d.Id==id).First();
-            //ViewBag.selected = ad.Category.LanguageId;
+            var ad = _context.Advertisements.Include("Category").Where(d=>d.Id==id).ProjectTo<AdvertisementViewModel>().First();
             return PartialView("_AddOrEdit", ad);
         }
     }
